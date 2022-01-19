@@ -34,31 +34,32 @@ const sendMessage = async (req, res) => {
                 logQR: false,
             })
             .then(async (client) => {
-                const device = await client.getHostDevice()
-                const dataPicture = await client.getProfilePicFromServer(device.wid._serialized)
-
                 await client.sendText(`${number}@c.us`, msg);
 
-                // await client.sendText('554799828278@c.us', 'A simple message with buttons', {
-                //     buttons: [
-                //         {
-                //             id: 'your custom id 1',
-                //             text: 'Some text'
-                //         },
-                //         {
-                //             id: 'another id 2',
-                //             text: 'Another text'
-                //         }
-                //     ],
-                //     title: 'Title text', // Optional
-                //     footer: 'Footer text' // Optional
-                // });
+                await client.sendText(`${number}@c.us`, 'A simple message with buttons', {
+                    buttons: [
+                        {
+                            id: '1',
+                            text: 'Opção 1'
+                        },
+                        {
+                            id: '2',
+                            text: 'Opção 2'
+                        },
+                        {
+                            id: '3',
+                            text: 'Opção 3'
+                        }
+                    ],
+                    title: 'Teste botões', // Optional
+                    footer: 'Descrição' // Optional
+                });
 
                 await client.close()
 
                 res.json({
                     success: true,
-                    message: "Conseguiu",
+                    message: "Enviado",
                 });
 
             })
